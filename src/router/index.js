@@ -5,6 +5,7 @@ import articleDis from '@/pages/articledis/articleDis'
 import activity from '@/pages/activity/activity'
 import addUser from '@/pages/addUser/addUser'
 import order from '@/pages/order/order'
+import addGoods from '@/pages/addGoods/addGoods'
 
 Vue.use(Router)
 
@@ -30,6 +31,10 @@ export default new Router({
         {
           path: '/order',
           component: order
+        },
+        {
+          path: '/addgoods',
+          component: addGoods
         }
       ]
     }

@@ -4,6 +4,7 @@
     <router-link to="/activity">去活动页</router-link>
     <router-link to="/adduser">添加会员</router-link>
     <router-link to="/order">去订单页</router-link>
+    <router-link to="/addgoods">添加商品</router-link>
     <router-view></router-view>
   </div>
 </template>

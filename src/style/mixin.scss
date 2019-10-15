@@ -1,1 +1,24 @@
 $bgColor:#eee;
+
+@mixin goodsBox {
+    width: 100%;
+    min-height: 4rem;
+    background: #fff;
+    border-radius: .2rem;
+    margin-bottom: .35rem;;
+}
+
+@mixin h2Before {
+    line-height: 1.5rem;
+    font-size: .47rem;
+    position: relative;
+    padding-left: .35rem;
+    &::before{
+        content: '';
+        padding:.25rem .1rem;
+        position: absolute;
+        left: 0;
+        top: .5rem;
+        background: orange;
+    }
+}
