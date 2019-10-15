@@ -1,6 +1,9 @@
 <template>
     <div class="article">
-        <common-head></common-head>
+        <common-head :headBg="headBg" :showBack="showBack">
+            <h3 class="head-title" slot="title">文章评价详情</h3>
+            <svg t="1571023054667" slot="right-icon" class="more-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3792" width="20" height="20"><path d="M512 863.361024m-109.441024 0a53.438 53.438 0 1 0 218.882048 0 53.438 53.438 0 1 0-218.882048 0Z" p-id="3793" fill="#2c2c2c"></path><path d="M512 517.761024m-109.441024 0a53.438 53.438 0 1 0 218.882048 0 53.438 53.438 0 1 0-218.882048 0Z" p-id="3794" fill="#2c2c2c"></path><path d="M512 160.641024m-109.441024 0a53.438 53.438 0 1 0 218.882048 0 53.438 53.438 0 1 0-218.882048 0Z" p-id="3795" fill="#2c2c2c"></path></svg>
+        </common-head>
         <section class="main">
             <!-- 店铺 -->
             <section class="business">
@@ -49,6 +52,15 @@
 import commonHead from '../../components/commonHead'
 import footDis from '../../components/footDis'
 export default {
+    data() {
+        return {
+            headBg:{
+                background:'#eee',
+                color:'#000'
+            },
+            showBack:true
+        }
+    },
     components:{
         commonHead,
         footDis
@@ -65,6 +77,10 @@ export default {
         z-index: 9;
         background: $bgColor;
         padding-bottom: 4.5rem;
+        overflow: hidden;
+        .head-title{
+            font-size: .47rem;
+        }
     }
     .main{
         width: 94%;

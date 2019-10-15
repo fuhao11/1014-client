@@ -1,7 +1,7 @@
 <template>
     <div class="foot-dis" :style="{bottom : dHeight + 'px'}">
         <div class="foot-input">
-            <input type="text" class="input" placeholder="说点什么吧" @focus="inputFoucs" @blur="inputBlur">
+            <input type="text" class="input" placeholder="说点什么吧" ref="Input" @focus="inputFoucs" @blur="inputBlur">
         </div>
         <div class="foot-right" v-show="!showPublish">
             <svg t="1571032548969" class="zan-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8119" width="20" height="20"><path d="M705.403848 64.46829c-76.854389 0-148.311861 38.554084-195.34506 102.123912-47.007617-63.587224-118.448716-102.123912-195.344037-102.123912-138.54031 0-251.251348 123.228579-251.251348 274.711665 0 90.369194 40.368406 153.767106 72.820516 204.702172 94.311992 147.95268 331.443761 332.071048 341.487511 339.834872 9.676383 7.479345 20.989033 11.222599 32.275077 11.222599 11.31265 0 22.607904-3.744277 32.270984-11.222599 10.057053-7.763824 247.205195-191.882192 341.488535-339.834872 32.466436-50.939159 72.849168-114.332978 72.849168-204.702172C956.655196 187.69687 843.939041 64.46829 705.403848 64.46829L705.403848 64.46829zM837.929164 508.917802c-89.77056 140.875494-327.883679 324.878229-327.883679 324.878229s-238.086513-184.002734-327.887772-324.878229c-33.120328-52.005444-62.774719-101.438297-62.774719-169.736822 0-117.939109 87.443561-213.58447 195.331757-213.58447 79.730902 0 148.175761 52.308343 178.538279 127.194914l0-0.37146 0.080841 0c2.26253 7.806803 8.857738 13.501502 16.711614 13.501502 7.880481 0 14.474666-5.694699 16.720823-13.501502l0.230244 0c30.435173-74.66349 98.785887-126.823454 178.406273-126.823454 107.86159 0 195.331757 95.64536 195.331757 213.58447C900.734582 407.479505 871.075075 456.911334 837.929164 508.917802L837.929164 508.917802zM837.929164 508.917802" p-id="8120" fill="#515151"></path></svg>
@@ -18,7 +18,8 @@ export default {
         return {
             wHeight:0,
             dHeight:0,
-            showPublish:false
+            showPublish:false,
+            timer:null
         }
     },
     methods:{
@@ -26,24 +27,44 @@ export default {
             var _this = this;
             console.log('input获取焦点了')
             _this.showPublish = true;
-            setTimeout(() => {
-                let cHeight = document.documentElement.clientHeight
-                _this.dHeight = _this.wHeight - cHeight
-            },100)
+            // _this.$refs.Input.scrollIntoView() QQ浏览器有效 自带浏览器无效
+
+            // setTimeout(() => {
+            //     let cHeight = document.documentElement.clientHeight
+            //     _this.dHeight = _this.wHeight - cHeight
+            //     console.log(_this.dHeight)
+            // },100)
+
+            // _this.timer = setTimeout(() => {
+            //     document.body.scrollTop = document.body.scrollHeight
+            // },100)
         },
         inputBlur(){
             var _this = this;
             _this.showPublish = false;
-            console.log('input失去焦点了')
+            // clearInterval(_this.timer)
+            // console.log('input失去焦点了')
+            // setTimeout(() => {
+            //     _this.dHeight = 0
+            // },100)
+        },
+        wResize(){
+            let cHeight = document.documentElement.clientHeight
+            
             setTimeout(() => {
-                _this.dHeight = 0
-            },100)
+                // this.dHeight = this.wHeight - cHeight + 44
+                // alert(window.innerHeight)
+            },1000)
+            // setTimeout(() => {
+            //     document.activeElement.scrollIntoViewIfNeeded();
+            // },100)
         }
     },
     mounted(){
         var _this = this;
         _this.wHeight = document.documentElement.clientHeight
-        // alert(_this.wHeight)
+        // alert(window.innerHeight)
+        // window.addEventListener('resize', _this.wResize)
         
     }
 }
