@@ -1,5 +1,5 @@
 <template>
-    <div class="order">
+    <div class="order" @click="orderClick">
         <common-head :headBg="headBg" :showBack="showBack">
             <div slot="input" class="input">
                 <svg t="1571102571197" class="search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4104" width="20" height="20"><path d="M435.1 796.8c-97.9 0-189.9-38.1-259.1-107.3-69.3-69.3-107.4-161.3-107.4-259.2 0-97.9 38.1-189.9 107.3-259.1 142.9-142.9 375.4-142.9 518.3 0 69.2 69.2 107.3 161.3 107.3 259.1 0 97.9-38.1 189.9-107.3 259.1C625 758.6 533 796.8 435.1 796.8z m0-687.1c-82.1 0-164.2 31.2-226.8 93.8-60.6 60.6-93.9 141.1-93.9 226.8 0 85.7 33.4 166.2 93.9 226.8 60.6 60.6 141.1 93.9 226.8 93.9s166.2-33.4 226.8-93.9c60.6-60.6 93.9-141.1 93.9-226.8 0-85.7-33.4-166.2-93.9-226.8-62.6-62.5-144.7-93.8-226.8-93.8z" fill="#333333" p-id="4105"></path><path d="M932.5 960.1c-5.9 0-11.7-2.2-16.2-6.7l-243-243c-8.9-8.9-8.9-23.4 0-32.4 8.9-8.9 23.4-8.9 32.4 0l243 243c8.9 8.9 8.9 23.4 0 32.4-4.5 4.4-10.3 6.7-16.2 6.7z" fill="#333333" p-id="4106"></path></svg>
@@ -12,13 +12,37 @@
                 <li class="nav-item">线下订单</li>
                 <li class="nav-item">线上订单</li>
                 <li class="nav-item">退货退款</li>
-                <li class="nav-item" @click="selClick">筛选 <svg t="1571038840649" class="sel-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10991" width="20" height="20"><path d="M755.342 433.89L537.778 671.8a34.238 34.238 0 0 1-25.718 11.637A34.238 34.238 0 0 1 486.34 671.8L268.777 433.89c-10.621-11.218-13.903-27.568-8.414-42.009s18.737-24.525 34.133-25.897h434.949c15.455 1.313 28.761 11.337 34.251 25.838 5.55 14.5 2.268 30.79-8.354 42.068z" p-id="10992" fill="#707070"></path></svg></li>
+                <li class="nav-item" @click.prevent="selClick">筛选 <svg t="1571038840649" class="sel-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10991" width="20" height="20"><path d="M755.342 433.89L537.778 671.8a34.238 34.238 0 0 1-25.718 11.637A34.238 34.238 0 0 1 486.34 671.8L268.777 433.89c-10.621-11.218-13.903-27.568-8.414-42.009s18.737-24.525 34.133-25.897h434.949c15.455 1.313 28.761 11.337 34.251 25.838 5.55 14.5 2.268 30.79-8.354 42.068z" p-id="10992" fill="#707070"></path></svg></li>
             </ul>
-            <ul class="nav-status-list" v-show="showNavStatus">
-                <li class="nav-status">全部 (4)</li>
-                <li class="nav-status">未完成 (4)</li>
-                <li class="nav-status">已完成 (4)</li>
-            </ul>
+            <aside class="nav-status-list" v-show="showNavStatus">
+                <div class="nav-status">
+                    <section class="nav">
+                        <h2>下单日期</h2>
+                        <div class="nav-select">
+                            <div class="nav-select-item">全部</div>
+                            <div class="nav-select-item">今日</div>
+                            <div class="nav-select-item">昨日</div>
+                            <div class="nav-select-item">自定义</div>
+                        </div>
+                    </section>
+                    <section class="nav">
+                        <h2>订单来源</h2>
+                        <div class="nav-select">
+                            <div class="nav-select-item">全部</div>
+                            <div class="nav-select-item">云收银</div>
+                            <div class="nav-select-item">脸蛋儿</div>
+                        </div>
+                    </section>
+                    <section class="nav">
+                        <h2>收银员</h2>
+                        <div class="nav-select">
+                            <div class="nav-select-item">收银员01</div>
+                            <div class="nav-select-item">收银员02</div>
+                            <div class="nav-select-item">收银员03</div>
+                        </div>
+                    </section>
+                </div>
+            </aside>
 
             <!-- 订单列表 -->
             <div class="order-list">
@@ -93,8 +117,13 @@ export default {
         CommonHead
     },
     methods:{
-        selClick(){
+        selClick(e){
+            e.stopPropagation();
+            
             this.showNavStatus = !this.showNavStatus;
+        },
+        orderClick(){
+            this.showNavStatus = false;
         }
     }
 }
@@ -159,21 +188,50 @@ export default {
         }
     }
     .nav-status-list{
-        width: 100%;
+        width: 60%;
         overflow: hidden;
         display:flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
+        position: fixed;
+        top: 1.3rem;
+        right:0;
+        bottom:0;
+        background: #fff;
+        box-shadow: 0 0 5px 5px #eee;
+        
     }
     .nav-status{
-        width:24%;
-        height: .7rem;
-        line-height: .7rem;
-        color: #fff;
-        text-align: center;
-        margin-right: .2rem;
-        background: orange;
-        border-radius: .5rem;
-        font-size: .42rem;
+        // width:24%;
+        // height: .7rem;
+        // line-height: .7rem;
+        // color: #fff;
+        // text-align: center;
+        // margin-right: .2rem;
+        // background: orange;
+        // border-radius: .5rem;
+        // font-size: .42rem;
+        width: 100%;
+        min-height: 5rem;
+
+    }
+    .nav-select{
+        width: 100%;
+        min-height: 3rem;
+        display: flex;
+        // justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        .nav-select-item{
+            width: 40%;
+            height: 1rem;
+            text-align: center;
+            line-height: 1rem;
+            border:1px solid #ccc;
+            border-radius: .15rem;
+            margin:0 .15rem;
+        }
     }
     .order-list{
         width: 100%;

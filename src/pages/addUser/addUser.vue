@@ -1,6 +1,6 @@
 <template>
     <div class="add-user">
-        <common-head :headBg="headBg">
+        <common-head :headBg="headBg" :showBack="true">
             <h3 class="head-title" slot="title">添加会员</h3>
             <div slot="right-icon">保存</div>
         </common-head>
