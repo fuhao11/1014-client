@@ -195,9 +195,10 @@ export default {
         justify-content: center;
         align-items: center;
         position: fixed;
-        top: 1.3rem;
+        top: 0;
         right:0;
         bottom:0;
+        z-index: 101;
         background: #fff;
         box-shadow: 0 0 5px 5px #eee;
         
