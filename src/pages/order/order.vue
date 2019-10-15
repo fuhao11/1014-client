@@ -14,10 +14,10 @@
                 <li class="nav-item">退货退款</li>
                 <li class="nav-item" @click.prevent="selClick">筛选 <svg t="1571038840649" class="sel-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10991" width="20" height="20"><path d="M755.342 433.89L537.778 671.8a34.238 34.238 0 0 1-25.718 11.637A34.238 34.238 0 0 1 486.34 671.8L268.777 433.89c-10.621-11.218-13.903-27.568-8.414-42.009s18.737-24.525 34.133-25.897h434.949c15.455 1.313 28.761 11.337 34.251 25.838 5.55 14.5 2.268 30.79-8.354 42.068z" p-id="10992" fill="#707070"></path></svg></li>
             </ul>
-            <aside class="nav-status-list" v-show="showNavStatus">
+            <aside class="nav-status-list" :style="{right: asideRight + '%'}">
                 <div class="nav-status">
                     <section class="nav">
-                        <h2>下单日期</h2>
+                        <h2 class="nav-sel-title">下单日期</h2>
                         <div class="nav-select">
                             <div class="nav-select-item">全部</div>
                             <div class="nav-select-item">今日</div>
@@ -26,7 +26,7 @@
                         </div>
                     </section>
                     <section class="nav">
-                        <h2>订单来源</h2>
+                        <h2 class="nav-sel-title">订单来源</h2>
                         <div class="nav-select">
                             <div class="nav-select-item">全部</div>
                             <div class="nav-select-item">云收银</div>
@@ -34,7 +34,7 @@
                         </div>
                     </section>
                     <section class="nav">
-                        <h2>收银员</h2>
+                        <h2 class="nav-sel-title">收银员</h2>
                         <div class="nav-select">
                             <div class="nav-select-item">收银员01</div>
                             <div class="nav-select-item">收银员02</div>
@@ -106,6 +106,8 @@ import CommonHead from '../../components/commonHead'
 export default {
     data() {
         return {
+            timer:null,
+            asideRight:-65,
             headBg:{
                 background:'orange'
             },
@@ -119,11 +121,14 @@ export default {
     methods:{
         selClick(e){
             e.stopPropagation();
+            var _this = this;
+            _this.showNavStatus = true;
+            _this.asideRight = 0;
             
-            this.showNavStatus = !this.showNavStatus;
         },
         orderClick(){
             this.showNavStatus = false;
+            this.asideRight = -65;
         }
     }
 }
@@ -199,6 +204,7 @@ export default {
         right:0;
         bottom:0;
         z-index: 101;
+        transition: all .4s ease-out;
         background: #fff;
         box-shadow: 0 0 5px 5px #eee;
         
@@ -224,6 +230,7 @@ export default {
         // justify-content: space-around;
         align-items: center;
         flex-wrap: wrap;
+        margin-bottom: .35rem;
         .nav-select-item{
             width: 40%;
             height: 1rem;
@@ -233,6 +240,9 @@ export default {
             border-radius: .15rem;
             margin:0 .15rem;
         }
+    }
+    .nav-sel-title{
+        margin-bottom: .3rem;
     }
     .order-list{
         width: 100%;
