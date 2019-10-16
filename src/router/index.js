@@ -6,6 +6,7 @@ import activity from '@/pages/activity/activity'
 import addUser from '@/pages/addUser/addUser'
 import order from '@/pages/order/order'
 import addGoods from '@/pages/addGoods/addGoods'
+import apply from '@/pages/apply/apply'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
         {
           path: '/addgoods',
           component: addGoods
+        },
+        {
+          path: '/apply',
+          component: apply
         }
       ]
     }

@@ -1,10 +1,11 @@
 <template>
   <div class="hello">
-    <router-link to="/articledis">去评论</router-link>
-    <router-link to="/activity">去活动页</router-link>
-    <router-link to="/adduser">添加会员</router-link>
-    <router-link to="/order">去订单页</router-link>
-    <router-link to="/addgoods">添加商品</router-link>
+    <router-link tag="div" to="/articledis">去评论</router-link>
+    <router-link tag="div" to="/activity">去活动页</router-link>
+    <router-link tag="div" to="/adduser">添加会员</router-link>
+    <router-link tag="div" to="/order">去订单页</router-link>
+    <router-link tag="div" to="/addgoods">添加商品</router-link>
+    <router-link tag="div" to="/apply">刷脸支付开通申请表</router-link>
     <router-view></router-view>
   </div>
 </template>
@@ -35,5 +36,12 @@ li {
 }
 a {
   color: #42b983;
+}
+.hello{
+  display: flex;
+  min-height: 6rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

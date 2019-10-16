@@ -6,9 +6,11 @@
         </common-head>
         <section class="main">
             <section class="upload-section">
-                <div class="up-img">
-                    <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2350171032,3227234175&fm=26&gp=0.jpg" alt="">
+                <div class="up-img" @click.prevent="onUpload">
+                    <img :src="defaultPhoto" alt="">
+                    <input type="file" @change="inputChange" ref="upload" accept="image/png,image/jpeg,image/jpg" style="display:none">
                 </div>
+                
                 <div class="up-text">上传我的脸蛋儿</div>
             </section>
 
@@ -49,6 +51,7 @@ import CommonHead from '../../components/commonHead'
 export default {
     data() {
         return {
+            defaultPhoto:'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2350171032,3227234175&fm=26&gp=0.jpg',
             headBg:{
                 background:'orange',
                 color:'#fff'
@@ -57,6 +60,37 @@ export default {
     },
     components:{
         CommonHead
+    },
+    methods:{
+        onUpload(){
+            var _this = this;
+            // console.log(_this.$refs.upload)
+            _this.$refs.upload.dispatchEvent(new MouseEvent('click'))
+            // _this.$refs.upload.onChange = function(){
+            //     console.log('upload')
+            // }
+        },
+        inputChange(e){
+            console.log(e)
+            console.log(e.target.files[0])
+            var file = e.target.files[0]
+            if(file){
+               this.doFile(file) 
+            }
+        },
+        doFile(file){
+            var _this = this;
+            var fr = new FileReader()
+            fr.readAsDataURL(file)
+            fr.onload = function() {
+                console.log(this)
+                console.log(this.result.length)
+                _this.defaultPhoto = this.result
+            }
+            fr.onprogress = function(e){
+                console.log(e.loaded/e.total * 100 +'%')
+            }
+        }
     }
 }
 </script>
