@@ -42,6 +42,8 @@ export default {
         inputBlur(){
             var _this = this;
             _this.showPublish = false;
+            // window.scrollTo(500,500)
+            window.scrollTo(0, document.documentElement.clientHeight);
             // clearInterval(_this.timer)
             // console.log('input失去焦点了')
             // setTimeout(() => {
@@ -64,7 +66,7 @@ export default {
         var _this = this;
         _this.wHeight = document.documentElement.clientHeight
         // alert(window.innerHeight)
-        // window.addEventListener('resize', _this.wResize)
+        // window.addEventListener('resize', _this.wResize) ios8-11获取焦点不触发resize
         
     }
 }
@@ -81,35 +83,47 @@ export default {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .foot-input{
-            width: 75%;
-            .input{
-                width: 100%;
-                height: .95rem;
-                padding:0 .2rem;
-                border:0;
-                outline: none;
-            }
+        
+    }
+    .foot-input{
+        width: 75%;
+        .input{
+            width: 100%;
+            height: .95rem;
+            padding:0 .2rem;
+            border:0;
+            outline: none;
         }
-        .foot-right{
-            width: 17%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .zan-icon,.share-icon{
-                width: .52rem;
-                height: .52rem;
-            }
-            .publish{
-                display: inline-block;
-                width: 95%;
-                height: .7rem;
-                line-height: .7rem;
-                text-align: center;
-                background: burlywood;
-                border-radius: .2rem;
-                color: #fff;
-            }
+    }
+    .foot-right{
+        width: 17%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .zan-icon,.share-icon{
+            width: .52rem;
+            height: .52rem;
         }
+        .publish{
+            display: inline-block;
+            width: 95%;
+            height: .7rem;
+            line-height: .7rem;
+            text-align: center;
+            background: burlywood;
+            border-radius: .2rem;
+            color: #fff;
+        }
+    }
+    .static{
+        position: static;
+        width: 100%;
+        height: 1rem;
+        box-sizing: border-box;
+        background: #eee;
+        padding:.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 </style>
